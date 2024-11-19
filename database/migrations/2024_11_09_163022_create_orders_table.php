@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('table_number');
             $table->decimal('total_price', 10, 2);
             $table->string('status')->default('pending');
+             $table->string('snap_token')->nullable();
             $table->timestamps();
         });
     }

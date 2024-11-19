@@ -21,6 +21,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+Route::get('/checkout/{order:id}', [OrderController::class, 'checkout'])->name('checkout');
+Route::get('/checkout/success/{order:id}', [OrderController::class, 'success'])->name('order.success');
 
 Route::middleware('auth')->group(function () {
     Route::get('/items', [ItemController::class, 'index'])->name('item.index');
@@ -31,7 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/items/{item:id}', [ItemController::class, 'destroy'])->name('item.destroy');
 
     Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
-    Route::get('/orders/create', [OrderController::class, 'create'])->name('order.create');
     Route::get('/orders/{order:id}/edit', [OrderController::class, 'edit'])->name('order.edit');
     Route::patch('/orders/{order:id}', [OrderController::class, 'update'])->name('order.update');
     Route::delete('/orders/{order:id}', [OrderController::class, 'destroy'])->name('order.destroy');
