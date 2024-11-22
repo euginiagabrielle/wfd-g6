@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
@@ -49,15 +50,10 @@ class ItemController extends Controller
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
         }
+        $validated['uuid'] = Str::uuid()->toString();
+        $validated['image'] = $imagePath ?? null;
 
-        Item::create([
-            'name' => $validated['name'],
-            'description' => $validated['description'],
-            'price' => $validated['price'],
-            'category' => $validated['category'],
-            'image' => $imagePath ?? null,
-            'availability' => $validated['availability'] ?? true,
-        ]);
+        Item::create($validated);
         return redirect()->route('item.index')->with('success', 'Item created successfully');
     }
     public function destroy($id)

@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('discounts', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid()->primary();
             $table->string('name');
             $table->integer('value');
-            $table->foreignId('item_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('item_id')->nullable()->references('uuid')->on('items')->onDelete('cascade');
             $table->decimal('minimum', 10, 2);
             $table->timestamps();
         });
