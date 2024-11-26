@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Str;
 class ItemController extends Controller
 {
     //
@@ -51,6 +51,7 @@ class ItemController extends Controller
         }
 
         Item::create([
+            'id' => Str::uuid()->toString(),
             'name' => $validated['name'],
             'description' => $validated['description'],
             'price' => $validated['price'],

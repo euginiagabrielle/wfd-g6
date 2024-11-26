@@ -105,6 +105,7 @@
                 const notes = document.getElementById("orderNotes").value;
 
                 if (quantity > 0) {
+                    console.log('ya')
                     addToCart({
                         item: {
                             id: itemId,
