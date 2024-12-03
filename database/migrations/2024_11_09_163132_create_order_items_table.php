@@ -12,8 +12,6 @@ return new class extends Migration {
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuId('order_id')->nullable()->references('id')->on('orders')->onDelete('cascade');
-            $table->foreignUuId('item_id')->nullable()->references('id')->on('items')->onDelete('cascade');
             $table->integer('quantity');
             $table->decimal('price', 10, 2);
             $table->string('notes')->nullable();
