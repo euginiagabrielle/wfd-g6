@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('discounts', function (Blueprint $table) {
-            $table->uuid()->primary();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->integer('value');
             $table->foreignUuId('item_id')->nullable()->references('id')->on('items')->onDelete('cascade');
