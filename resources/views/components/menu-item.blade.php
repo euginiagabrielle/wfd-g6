@@ -37,14 +37,13 @@
 
         <div class="flex justify-end gap-2">
             <button data-modal-hide="{{ $item['id'] }}-modal" class="px-4 py-2">Cancel</button>
-            <button data-modal-hide="{{ $item['id'] }}-modal"
+            <button class="px-4 py-2 bg-red-600 text-white" data-modal-hide="{{ $item['id'] }}-modal"
                 onclick="confirmAddToCart(
-            {{ $item['id'] }}, 
-            '{{ addslashes($item['name']) }}', 
-            '{{ addslashes($item['description']) }}', 
+            {{ '\'' . $item['id'] . '\'' }}, 
+            {{ '\'' . $item['name'] . '\'' }}, 
+            {{ '\'' . $item['description'] . '\'' }}, 
             {{ $item['price'] }}
-        )"
-                class="px-4 py-2 bg-red-600 text-white">
+        )">
                 Add to Cart
             </button>
         </div>

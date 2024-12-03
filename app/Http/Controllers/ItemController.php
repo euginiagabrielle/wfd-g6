@@ -6,7 +6,7 @@ use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Str;
 class ItemController extends Controller
 {
     //
@@ -54,6 +54,16 @@ class ItemController extends Controller
         $validated['image'] = $imagePath ?? null;
 
         Item::create($validated);
+
+        Item::create([
+            'id' => Str::uuid()->toString(),
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'price' => $validated['price'],
+            'category' => $validated['category'],
+            'image' => $imagePath ?? null,
+            'availability' => $validated['availability'] ?? true,
+        ]);
         return redirect()->route('item.index')->with('success', 'Item created successfully');
     }
     public function destroy($id)

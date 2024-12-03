@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Discount;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
@@ -14,17 +16,19 @@ class OrderController extends Controller
         return view('order.index', ['orders' => Order::all()]);
     }
 
-    public function checkout(Request $request, Order $order){
+    public function checkout(Request $request, Order $order)
+    {
         $orderItems = $order->orderItems;
-        
+        // dd($orderItems);
         return view('order.checkout', [
-            'order'=> $order,
+            'order' => $order,
             'tableNumber' => $order->table_number,
-            'items' => $orderItems
+            'items' => $orderItems,
         ]);
     }
 
-    public function success(Request $request, Order $order){
+    public function success(Request $request, Order $order)
+    {
         $order->status = 'success';
         $order->save();
         return view('order.success');
@@ -46,10 +50,31 @@ class OrderController extends Controller
             },
             0,
         );
+        $itemIds = array_map(fn($entry) => $entry['item']['id'], $items);
+        $discounts = Discount::whereIn('item_id', $itemIds)->get()->keyBy('item_id');
+        $totalPriceAfterDiscount = array_reduce(
+            $items,
+            function ($total, $item) use ($discounts) {
+                $itemId = $item['item']['id'];
+                $originalPrice = $item['item']['price'] * $item['quantity'];
 
+                if ($discounts->has($itemId)) {
+                    $discount = $discounts->get($itemId);
+
+                    if ($originalPrice >= $discount->min_purchase_amount) {
+                        $discountValue = ($discount->value / 100) * $originalPrice;
+                        $originalPrice -= $discountValue;
+                    }
+                }
+
+                return $total + $originalPrice;
+            },
+            0,
+        );
         $order = Order::create([
+            'id' => Str::uuid()->toString(),
             'table_number' => $data['table_number'],
-            'total_price' => $totalPrice,
+            'total_price' => $totalPriceAfterDiscount,
             'status' => 'pending',
         ]);
 
@@ -62,12 +87,12 @@ class OrderController extends Controller
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
 
-        $params = array(
-            'transaction_details' => array(
+        $params = [
+            'transaction_details' => [
                 'order_id' => rand(),
                 'gross_amount' => $totalPrice,
-            ),
-        );
+            ],
+        ];
         $snapToken = \Midtrans\Snap::getSnapToken($params);
         $order->snap_token = $snapToken;
         $order->save();
@@ -82,6 +107,6 @@ class OrderController extends Controller
             ]);
         }
 
-        return redirect()->route('checkout',  $order->id);
+        return redirect()->route('checkout', $order->id);
     }
 }

@@ -38,9 +38,8 @@
     </div>
     @yield('content')
     @if (!str_starts_with(request()->url(), request()->root()) ||
-    request()->routeIs('login') || 
-    request()->routeIs('register')
-    )
+        request()->routeIs('login') ||
+        request()->routeIs('register'))
         {{ $slot }}
     @endif
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>

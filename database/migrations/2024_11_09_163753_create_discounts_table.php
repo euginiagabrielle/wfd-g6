@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid()->primary();
             $table->string('name');
             $table->integer('value');
-            $table->foreignUuid('item_id')->nullable()->references('uuid')->on('items')->onDelete('cascade');
+            $table->foreignUuId('item_id')->nullable()->references('id')->on('items')->onDelete('cascade');
             $table->decimal('minimum', 10, 2);
             $table->timestamps();
         });

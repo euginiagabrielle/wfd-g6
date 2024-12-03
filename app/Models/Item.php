@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use HasUuids;
-    protected $primaryKey = 'uuid';
+    protected $primaryKey = 'id';
     public $incrementing = false;
-
     protected $fillable = [
         'name',
         'description',
