@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('table_number');
             $table->decimal('total_price', 10, 2);
             $table->string('status')->default('pending');
-             $table->string('snap_token')->nullable();
+            $table->string('snap_token')->nullable();
             $table->timestamps();
         });
     }
