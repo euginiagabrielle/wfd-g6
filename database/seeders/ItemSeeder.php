@@ -89,11 +89,20 @@ class ItemSeeder extends Seeder
             ],
             [
                 'id'=>Str::uuid(),
-                'name'=>'Kopi C',
+                'name'=>'Kopi O',
                 'description'=>'Kopi khas Asia yang disajikan tanpa susu, dibuat dengan kopi yang diseduh kental dan dicampur dengan gula, memberikan rasa kopi yang kuat dan sedikit manis',
                 'price'=>12000.00,
                 'category'=>'Coffee',
                 'image'=>'items/coffee/coffee-1.jpg',
+                'availability'=>true
+            ],
+            [
+                'id'=>Str::uuid(),
+                'name'=>'Kopi C',
+                'description'=>'Kopi khas Asia yang disajikan dengan campuran susu kental manis, menghasilkan rasa kopi yang kaya, manis, dan creamy',
+                'price'=>12000.00,
+                'category'=>'Coffee',
+                'image'=>'items/coffee/coffee-2.jpg',
                 'availability'=>true
             ],
             [
