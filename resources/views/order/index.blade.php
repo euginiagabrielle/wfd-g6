@@ -19,7 +19,25 @@
                 <tr>
                     <td>{{ $order->id }}</td>
                     <td>{{ $order->table_number }}</td>
+                    <td>
+                        @foreach ($order->orderItems as $item)
+                            <p>
+                                {{ $item->item->name }}@if(!$loop->last) @endif
+                            </p>
+                        @endforeach
+                    </td>
+                    <td>
+                        @foreach ($order->orderItems as $orderItem)
+                            <p>
+                                {{ $orderItem->quantity }}@if(!$loop->last) @endif
+                            </p>
+                        @endforeach
+                    </td>
+                    <td>{{ $order->notes }}</td>
                     <td>{{ $order->status }}</td>
+                    <td>
+                        
+                    </td>
                 </tr>
             @endforeach
         </tbody>

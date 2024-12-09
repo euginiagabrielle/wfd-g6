@@ -14,12 +14,9 @@ class OrderController extends Controller
     //
     public function index()
     {
-        $orders = DB::table('orders')
-            ->join('order_items','orders.id','=', 'order_items.order_id')
-            ->select('orders.*', 'order_items.*')
-            ->get();
-            
-        return view('order.index', ['orders' => Order::all()]);
+        $orders = Order::with(['orderItems.item'])->get();
+
+        return view('order.index', ['orders' => $orders]);
     }
 
     public function checkout(Request $request, Order $order)
