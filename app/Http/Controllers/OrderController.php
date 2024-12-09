@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Discount;
 use App\Models\Order;
 use App\Models\OrderItem;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -13,6 +14,11 @@ class OrderController extends Controller
     //
     public function index()
     {
+        $orders = DB::table('orders')
+            ->join('order_items','orders.id','=', 'order_items.order_id')
+            ->select('orders.*', 'order_items.*')
+            ->get();
+            
         return view('order.index', ['orders' => Order::all()]);
     }
 
