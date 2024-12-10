@@ -4,6 +4,7 @@ use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ItemController::class, "menu"])->name('menu');
@@ -43,6 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/discounts/{discount:id}/edit', [DiscountController::class, 'edit'])->name('discount.edit');
     Route::patch('/discounts/{discount:id}', [DiscountController::class, 'update'])->name('discount.update');
     Route::delete('/discounts/{discount:id}', [DiscountController::class, 'destroy'])->name('discount.destroy');
+
+    Route::get('/reports', [ReportController::class, 'index'])->name('report.index');
 });
 
 require __DIR__ . '/auth.php';

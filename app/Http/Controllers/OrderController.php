@@ -112,12 +112,14 @@ class OrderController extends Controller
         return redirect()->route('checkout', $order->id);
     }
 
-    public function edit(Order $order) {
+    public function edit(Order $order) 
+    {
         $order->load(['orderItems.item']);
         return view('order.edit', compact('order')); 
     }
 
-    public function update(Request $request, Order $order) {
+    public function update(Request $request, Order $order) 
+    {
         $request->validate([
             'status' => 'required|in:pending,process,completed,canceled',
         ]);
