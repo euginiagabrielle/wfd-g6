@@ -22,21 +22,27 @@
                     <td>
                         @foreach ($order->orderItems as $item)
                             <p>
-                                {{ $item->item->name }}@if(!$loop->last) @endif
+                                {{ $item->item->name }}
                             </p>
                         @endforeach
                     </td>
                     <td>
                         @foreach ($order->orderItems as $orderItem)
                             <p>
-                                {{ $orderItem->quantity }}@if(!$loop->last) @endif
+                                {{ $orderItem->quantity }}
                             </p>
                         @endforeach
                     </td>
-                    <td>{{ $order->notes }}</td>
+                    <td>
+                        @foreach ($order->orderItems as $orderItem)
+                            <p>
+                                {{ $orderItem->notes }}
+                            </p>
+                        @endforeach
+                    </td>
                     <td>{{ $order->status }}</td>
                     <td>
-                        
+                        <a href="{{ route('order.edit', ['order' => $order->id]) }}">Edit</a>
                     </td>
                 </tr>
             @endforeach

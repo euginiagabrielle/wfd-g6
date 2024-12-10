@@ -112,4 +112,9 @@ class OrderController extends Controller
 
         return redirect()->route('checkout', $order->id);
     }
+
+    public function edit(Order $order) {
+        $order->load(['orderItems.item']);
+        return view('order.edit', compact('order')); 
+    }
 }

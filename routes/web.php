@@ -33,9 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/items/{item:id}', [ItemController::class, 'destroy'])->name('item.destroy');
 
     Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
-    Route::get('/orders/{order:id}/edit', [OrderController::class, 'edit'])->name('order.edit');
+    Route::get('/orders/{order:id}/edit', [OrderController::class, 'edit'])->name('order.edit'); // buat edit status pesanan
     Route::patch('/orders/{order:id}', [OrderController::class, 'update'])->name('order.update');
-    Route::delete('/orders/{order:id}', [OrderController::class, 'destroy'])->name('order.destroy');
+    Route::delete('/orders/{order:id}', [OrderController::class, 'destroy'])->name('order.destroy'); // buat batalkan pesanan
 
     Route::get('/discounts', [DiscountController::class, 'index'])->name('discount.index');
     Route::get('/discounts/create', [DiscountController::class, 'create'])->name('discount.create');
