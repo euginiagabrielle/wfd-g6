@@ -5,7 +5,7 @@
     <div class="p-4">
         <p class="text-red-600 text-3xl">{{ $item['name'] }}</p>
         <p class="font-inter text-red-800"> {{ $item['description'] }}</p>
-        <div class="flex mt-4 gap-2 justify-between items-center">
+        <div class="absolute bottom-4 right-4 flex gap-2 items-center">
             <p class="text-red-600 text-3xl">Rp, {{ number_format($item['price'], 0, ',', '.') }}</p>
             <x-primary-button data-modal-target="{{ $item['id'] }}-modal" data-modal-toggle="{{ $item['id'] }}-modal"
                 class="rounded-none bg-red-600 hover:bg-red-700">
