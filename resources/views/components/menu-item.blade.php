@@ -1,11 +1,11 @@
 @props(['item'])
 
-<div class="bg-orange-100">
+<div class="bg-orange-100 relative">
     <img class=" w-full h-60 object-cover" src="{{ asset('storage/' . $item['image']) }}" />
-    <div class="p-4">
+    <div class="p-4 mb-20">
         <p class="text-red-600 text-3xl">{{ $item['name'] }}</p>
         <p class="font-inter text-red-800"> {{ $item['description'] }}</p>
-        <div class="absolute bottom-4 right-4 flex gap-2 items-center">
+        <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center">
             <p class="text-red-600 text-3xl">Rp, {{ number_format($item['price'], 0, ',', '.') }}</p>
             <x-primary-button data-modal-target="{{ $item['id'] }}-modal" data-modal-toggle="{{ $item['id'] }}-modal"
                 class="rounded-none bg-red-600 hover:bg-red-700">

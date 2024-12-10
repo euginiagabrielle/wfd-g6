@@ -23,6 +23,7 @@
       @foreach ($order->orderItems as $orderItem)
          <p><span class="font-semibold">Item: </span> {{ $orderItem->item->name }}</p>
          <p><span class="font-semibold">Quantity: </span> {{ $orderItem->quantity }}</p>
+         <p><span class="font-semibold">Notes: </span> {{ $orderItem->notes }}</p>
          <hr>
       @endforeach
    </div>

@@ -2,7 +2,7 @@
 
 @section('content')
     @if ($showModal)
-        <div id="tableModal" class="fixed inset-0 flex items-center justify-center bg-gray-800/80 bg-opacity-50">
+        <div id="tableModal" class="fixed inset-0 flex items-center justify-center bg-gray-800/80 bg-opacity-50 z-50">
             <div class="bg-white p-6 sm:rounded-lg shadow-lg w-full sm:w-1/2 max-w-xl">
                 <h2 class="text-2xl tracking-wide">Enter Table Number</h2>
                 <form action="/" method="GET">
