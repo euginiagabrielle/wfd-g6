@@ -5,6 +5,12 @@
 <div class="contain m-8">
    <h1 class="text-2xl font-semibold my-5">Order Invoice</h1>
 
+   @if(session('success'))
+       <div class="bg-green-500 text-white p-3 rounded mb-4">
+           {{ session('success') }}
+       </div>
+   @endif
+
    <!-- Order Information -->
    <div class="mb-3 space-y-1">
      <p><span class="font-bold">Order ID: </span> {{ $order->id }}</p>
@@ -25,7 +31,7 @@
    <h2 class="mt-4 mb-2 font-bold">Order Status</h2>
    <form action="{{ route('order.update', ['order' => $order->id])}}" method="POST">
       @csrf
-      @method('PUT')
+      @method('PATCH')
 
       <p><span class="font-semibold">Current Status: </span> {{ ucfirst($order->status) }}</p>
       @if ($order->status === 'pending' || $order->status === 'process')

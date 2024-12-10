@@ -22,6 +22,13 @@ class UserSeeder extends Seeder
                 'email_verified_at'=>now(),
                 'password'=>Hash::make('admin1'),
                 'role'=>'admin',
+            ],
+            [
+                'name'=>'Manager 1',
+                'email'=>'manager1@example.com',
+                'email_verified_at'=>now(),
+                'password'=>Hash::make('manager1'),
+                'role'=>'manager',
             ]
         ]);
     }

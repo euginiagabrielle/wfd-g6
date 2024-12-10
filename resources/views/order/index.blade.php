@@ -40,7 +40,7 @@
                             </p>
                         @endforeach
                     </td>
-                    <td>{{ $order->status }}</td>
+                    <td>{{ ucfirst($order->status) }}</td>
                     <td>
                         <a href="{{ route('order.edit', ['order' => $order->id]) }}">Edit</a>
                     </td>

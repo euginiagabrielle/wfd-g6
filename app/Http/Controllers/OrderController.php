@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Discount;
 use App\Models\Order;
 use App\Models\OrderItem;
-use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -116,5 +115,20 @@ class OrderController extends Controller
     public function edit(Order $order) {
         $order->load(['orderItems.item']);
         return view('order.edit', compact('order')); 
+    }
+
+    public function update(Request $request, Order $order) {
+        $request->validate([
+            'status' => 'required|in:pending,process,completed,canceled',
+        ]);
+
+        if ($order->status !== 'pending' && $order->status !== 'process') {
+            return redirect()->back()->with('error', 'Status can only be updated when it is "pending" or "process".');
+        }
+
+        $order->status = $request->input('status');
+        $order->save();
+
+        return redirect()->route('order.index')->with('success', 'Order status updated successfully.');
     }
 }
