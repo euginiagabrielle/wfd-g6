@@ -1,7 +1,7 @@
 @props(['item'])
 
 <div class="bg-orange-100">
-    <img class=" w-full h-60 object-cover" src="{{ asset('storage/' . $item['image']) }}" />
+    <img class=" w-full h-60 object-cover" src="{{ asset('/storage/' . $item['image']) }}" />
     <div class="p-4">
         <p class="text-red-600 text-3xl">{{ $item['name'] }}</p>
         <p class="font-inter text-red-800"> {{ $item['description'] }}</p>

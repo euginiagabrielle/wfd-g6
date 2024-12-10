@@ -117,18 +117,34 @@ class OrderController extends Controller
         return view('order.edit', compact('order')); 
     }
 
+    // public function update(Request $request, Order $order) {
+    //     $request->validate([
+    //         'status' => 'required|in:pending,process,completed,canceled',
+    //     ]);
+
+    //     if ($order->status !== 'pending' && $order->status !== 'process') {
+    //         return redirect()->back()->with('error', 'Status can only be updated when it is "pending" or "process".');
+    //     }
+
+    //     $order->status = $request->input('status');
+    //     $order->save();
+
+    //     return redirect()->route('order.index')->with('success', 'Order status updated successfully.');
+    // }
+
     public function update(Request $request, Order $order) {
         $request->validate([
             'status' => 'required|in:pending,process,completed,canceled',
         ]);
-
+    
         if ($order->status !== 'pending' && $order->status !== 'process') {
-            return redirect()->back()->with('error', 'Status can only be updated when it is "pending" or "process".');
+            return response()->json(['success' => false, 'message' => 'Status can only be updated when it is "pending" or "process".']);
         }
-
+    
         $order->status = $request->input('status');
         $order->save();
-
-        return redirect()->route('order.index')->with('success', 'Order status updated successfully.');
+    
+        return response()->json(['success' => true, 'message' => 'Order status updated successfully.']);
     }
+    
 }

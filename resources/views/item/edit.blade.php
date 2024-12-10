@@ -1,8 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="p-4 py-8 bg-white w-full h-full">
-        <h1 class="font-bold text-lg w-fit mx-auto">Edit {{ $item['name'] }}</h1>
+    <div class="p-4 py-8  w-full h-full">
+    <br>
+
+        <div class="container mx-auto">
+                    <h1 class="text-3xl font-bold text-center">Edit {{ $item['name'] }}</h1>
+        </div>
+        
         <form class="flex flex-col max-w-2xl mx-auto" action="{{ route('item.update', $item['id']) }}" method="POST"
             enctype="multipart/form-data">
             @csrf
