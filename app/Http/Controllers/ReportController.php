@@ -15,22 +15,27 @@ class ReportController extends Controller
         $month = $request->query('month');
 
         if ($type === 'daily' && $date) {
+
             $salesReport = Order::whereDate('created_at', $date)
                 ->selectRaw('DATE(created_at) as date, id as order_id, total_price')
                 ->orderBy('created_at', 'asc')
                 ->get();
+
         } elseif ($type === 'monthly' && $month) {
+
             $monthParts = explode('-', $month);
             $salesReport = Order::whereMonth('created_at', $monthParts[1])
                 ->whereYear('created_at', $monthParts[0])
                 ->selectRaw('DATE(created_at) as date, id as order_id, total_price')
                 ->orderBy('created_at', 'asc')
                 ->get();
+
         } else {
-            // Default to all records if type is not specified or parameters are missing
+
             $salesReport = Order::selectRaw('DATE(created_at) as date, id as order_id, total_price')
                 ->orderBy('created_at', 'asc')
                 ->get();
+                
         }
 
         return view('report.index', compact('salesReport', 'type'));

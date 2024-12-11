@@ -45,10 +45,11 @@
                <option value="canceled">Canceled</option>
             </select>
          </div>
-         <button type="submit" class="btn btn-primary">Update Status</button>
+         <button type="submit" class="btn btn-primary mt-2 mb-4">Update Status</button>
       @else
-         <p>Status can only be edited when it is "pending or process".</p>
+         <p class="mt-2 mb-4">Status can only be edited when it is "pending or process".</p>
       @endif
    </form>
+   <a href="/orders" class="rounded mt-4 p-2 text-md leading-6 text-rose-600 bg-yellow-300 hover:bg-yellow-200 text-center">Back</a>
 </div>
 @endsection

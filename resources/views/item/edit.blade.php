@@ -63,6 +63,7 @@
                 </label>
             </div>
             <x-primary-button type="submit">Submit</x-primary-button>
+            <a href="/items" class="rounded mt-4 p-2 text-md leading-6 text-rose-600 bg-yellow-300 hover:bg-yellow-200 text-center">Cancel</a>
         </form>
     </div>
 @endsection

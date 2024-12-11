@@ -19,7 +19,7 @@ class ItemController extends Controller
         $tableNumber = $request->query('table');
         $showModal = !$request->has('table');
         
-        $items = Item::with('discounts') // Memuat relasi discounts
+        $items = Item::with('discounts')
         ->when($category, function ($query) use ($category) {
             $query->where('category', $category);
         })
