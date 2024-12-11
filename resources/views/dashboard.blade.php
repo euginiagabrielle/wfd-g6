@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="bg-white p-8 my-6 shadow-sm relative width-[100vw] max-w-7xl mx-auto">
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid md:grid-cols-2 gap-4">
                 <div>
                     <canvas id="itemCountChart"></canvas>
                 </div>
