@@ -102,7 +102,7 @@
 
             window.confirmAddToCart = function(itemId, itemName, itemDescription, itemPrice) {
                 const quantity = parseInt(document.getElementById(`orderQuantity-${itemId}`).textContent);
-                const notes = document.getElementById("orderNotes").value;
+                const notes = document.getElementById(`orderNotes-${itemId}`).value;
 
                 if (quantity > 0) {
                     console.log('ya')

@@ -5,6 +5,7 @@
     <ul>
         @foreach ($items as $item)
             <li>{{ $item->item->name }} ({{ $item->quantity }})</li>
+            <li>Notes: {{ $item->notes }}</li>
         @endforeach
     </ul>
     <p>Total: Rp {{ number_format($order->total_price, 0, ',', '.') }}</p>

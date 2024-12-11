@@ -32,7 +32,7 @@
 
         <div class="mb-4">
             <label class="block mb-2 text-red-600 text-xl">Notes</label>
-            <textarea id="orderNotes" class="w-full p-2 border rounded" placeholder="Any special requests?"></textarea>
+            <textarea id="orderNotes-{{ $item['id'] }}" class="w-full p-2 border rounded" placeholder="Any special requests?"></textarea>
         </div>
 
         <div class="flex justify-end gap-2">
