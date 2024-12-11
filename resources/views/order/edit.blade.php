@@ -40,25 +40,25 @@
             var orderId = '{{$order->id}}';
 
             $.ajax({
-            type: 'PATCH',  
-            url: '{{ route('order.update', ['order' => ':id']) }}'.replace(':id', orderId), 
-            data: {
-                _token: '{{ csrf_token() }}',  
-                status: status  
-            },
-            success: function(response) {
-                if (response.success) {
-                  //   alert('Order status updated successfully.');
-                    location.reload();  
-                } else {
-                    alert('Failed to update order status.');
+                type: 'PATCH',  
+                url: '{{ route('order.update', ['order' => ':id']) }}'.replace(':id', orderId), 
+                data: {
+                    _token: '{{ csrf_token() }}',  
+                    status: status  
+                },
+                success: function(response) {
+                    if (response.success) {
+                    //   alert('Order status updated successfully.');
+                        location.reload();  
+                    } else {
+                        alert('Failed to update order status.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('An error occurred: ' + error);
                 }
-            },
-            error: function(xhr, status, error) {
-                alert('An error occurred: ' + error);
-            }
+            });
         });
-    });
       </script>
 
 

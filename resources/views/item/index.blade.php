@@ -1,6 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        table.dataTable {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table.dataTable th,
+        table.dataTable td {
+            border: 1px solid #ddd;
+            /* Adjust the color and style of the border */
+        }
+
+        .item-image {
+            width: 100px;
+            /* Set the desired width */
+            height: 100px;
+            /* Set the desired height */
+            object-fit: cover;
+            /* Ensures the image is cropped to fit the specified dimensions */
+        }
+    </style>
     <br>
 
     <div class="container mx-auto">

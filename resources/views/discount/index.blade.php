@@ -1,9 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        table.dataTable {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table.dataTable th,
+        table.dataTable td {
+            border: 1px solid #ddd;
+            /* Adjust the color and style of the border */
+        }
+    </style>
+
     <br>
     <div class="container mx-auto">
-        <h1 class="text-3xl text-center">Discounts</h1>
+        <h1 class="text-3xl font-bold text-center">Discounts</h1>
     </div>
 
 
