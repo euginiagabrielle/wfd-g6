@@ -13,7 +13,7 @@ table.dataTable th, table.dataTable td {
 
 </style>
 
-<div class="container mx-auto my-8">
+<div class="container mx-auto my-8 px-8">
     <h1 class="text-2xl font-semibold mb-4">
         Sales Report - {{ ucfirst($type) }}
     </h1>
