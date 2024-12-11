@@ -3,7 +3,7 @@
 @section('content')
 <br>
 <div class="container mx-auto">
-            <h1 class="text-3xl font-bold text-center">WELCOME ADMIN</h1>
+            <h1 class="text-3xl font-bold text-center">Welcome, {{ Auth::user()->name }}!</h1>
 </div>
 <br>
 
