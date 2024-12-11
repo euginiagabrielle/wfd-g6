@@ -3,7 +3,9 @@
 <div class="bg-orange-100 relative">
     @if ($item->discounts->isNotEmpty())
         @foreach ($item->discounts as $discount)
-            <p class="absolute top-0 right-0 bg-red-700 text-white px-6 py-2">{{ $discount->value }}%</p>
+            @if ($discount->value > 0)
+                <p class="absolute top-0 right-0 bg-red-700 text-xl text-white px-5 py-2 shadow-md">{{ $discount->value }}%</p>
+            @endif
         @endforeach
     @endif
 

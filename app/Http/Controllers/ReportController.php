@@ -11,24 +11,27 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         $type = $request->query('type', 'daily');
-        $dateColumn = $type === 'daily' ? 'DATE(created_at)' : 'DATE_FORMAT(created_at, "%Y-%m")';
-
         $date = $request->query('date');
         $month = $request->query('month');
 
-        $query = Order::selectRaw("$dateColumn as date, id as order_id, total_price")
-                    ->orderBy('date', 'asc');
-
         if ($type === 'daily' && $date) {
-            $query->whereDate('created_at', $date);
+            $salesReport = Order::whereDate('created_at', $date)
+                ->selectRaw('DATE(created_at) as date, id as order_id, total_price')
+                ->orderBy('created_at', 'asc')
+                ->get();
+        } elseif ($type === 'monthly' && $month) {
+            $monthParts = explode('-', $month);
+            $salesReport = Order::whereMonth('created_at', $monthParts[1])
+                ->whereYear('created_at', $monthParts[0])
+                ->selectRaw('DATE(created_at) as date, id as order_id, total_price')
+                ->orderBy('created_at', 'asc')
+                ->get();
+        } else {
+            // Default to all records if type is not specified or parameters are missing
+            $salesReport = Order::selectRaw('DATE(created_at) as date, id as order_id, total_price')
+                ->orderBy('created_at', 'asc')
+                ->get();
         }
-
-        if ($type === 'monthly' && $month) {
-            $query->whereMonth('created_at', explode('-', $month)[1])
-                ->whereYear('created_at', explode('-', $month)[0]);
-        }
-
-        $salesReport = $query->get();
 
         return view('report.index', compact('salesReport', 'type'));
     }
