@@ -41,7 +41,6 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 text-rose-600 sm:flex">
                     <x-nav-link :href="route('report.index')" :active="request()->routeIs('report.index')" class="text-rose-600">
                         {{ __('Sales Report') }}
-                        halo
                     </x-nav-link>
                 </div>
             </div>
