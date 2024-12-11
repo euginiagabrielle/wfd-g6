@@ -3,7 +3,13 @@
 @tailwind utilities;
 
 @layer base {
-    * {
-        @apply font-bebas;
+    .btn {
+        @apply focus:ring-4 transition-colors focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2;
+    }
+    .btn-primary {
+        @apply text-black bg-yellow-400 hover:bg-yellow-400/80 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2;
+    }
+    .btn-secondary {
+        @apply text-black bg-white hover:bg-neutral-100/90 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2;
     }
 }

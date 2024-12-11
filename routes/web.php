@@ -10,7 +10,30 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ItemController::class, "menu"])->name('menu');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+      $itemCounts = DB::table('order_items')
+        ->join('items', 'order_items.item_id', '=', 'items.id')
+        ->select('items.name', DB::raw('COUNT(order_items.id) as count'))
+        ->groupBy('items.name')
+        ->pluck('count', 'items.name')->toArray();
+      $labels = array_keys($itemCounts);
+      $counts = array_values($itemCounts);
+    $dailyTotals = DB::table('orders')
+        ->select(
+            DB::raw('DATE(created_at) as date'), 
+            DB::raw('SUM(total_price) as total_sales')
+        )
+        ->groupBy('date')
+        ->orderBy('date')
+        ->get();
+
+    // Prepare data for Chart.js
+    $dateLabels = $dailyTotals->pluck('date')->toArray();
+    $salesData = $dailyTotals->pluck('total_sales')->toArray();
+
+    return view('dashboard', ['labels' => $labels, 
+        'counts' => $counts,
+        'dateLabels' => $dateLabels,
+        'salesData' => $salesData]);
 })
     ->middleware(['auth'])
     ->name('dashboard');
@@ -24,7 +47,9 @@ Route::middleware('auth')->group(function () {
 Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 Route::get('/checkout/{order:id}', [OrderController::class, 'checkout'])->name('checkout');
 Route::get('/checkout/success/{order:id}', [OrderController::class, 'success'])->name('order.success');
-
+Route::get('/test', function () {
+  return view('order.success');
+});
 Route::middleware('auth')->group(function () {
     Route::middleware(['role:admin,manager'])->group(function(){
         Route::get('/items', [ItemController::class, 'index'])->name('item.index');

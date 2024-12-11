@@ -2,18 +2,18 @@
 
 @section('content')
     <div class="p-4 py-8  w-full h-full">
-    <br>
+        <br>
 
-<div class="container mx-auto">
-            <h1 class="text-3xl font-bold text-center">Create Menu Item</h1>
-</div>
-        <form class="flex flex-col max-w-2xl mx-auto" action="{{ route('item.store') }}" method="POST"
+        <div class="container mx-auto">
+            <h1 class="text-3xl font-medium text-center">Create Menu Item</h1>
+        </div>
+        <form class="flex font-inter flex-col max-w-2xl mx-auto" action="{{ route('item.store') }}" method="POST"
             enctype="multipart/form-data">
             @csrf
             <div>
                 <x-input-label for="name" :value="__('Name')" />
-                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
-                    autofocus />
+                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')"
+                    required autofocus />
                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
             </div>
             <div class="mt-4">
@@ -61,8 +61,9 @@
                     <x-input-error :messages="$errors->get('availability')" class="mt-2" />
                 </label>
             </div>
-            <x-primary-button type="submit">Submit</x-primary-button>
-            <a href="/items" class="rounded mt-4 p-2 text-md leading-6 text-rose-600 bg-yellow-300 hover:bg-yellow-200 text-center">Cancel</a>
+            <x-primary-button class="font-bebas" type="submit">Submit</x-primary-button>
+            <a href="/items"
+                class="rounded mt-4 p-2 text-md font-bebas leading-6 text-rose-600 bg-yellow-300 hover:bg-yellow-200 text-center">Cancel</a>
         </form>
     </div>
 @endsection
