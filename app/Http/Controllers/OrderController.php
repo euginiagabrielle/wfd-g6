@@ -63,7 +63,7 @@ class OrderController extends Controller
                 if ($discounts->has($itemId)) {
                     $discount = $discounts->get($itemId);
 
-                    if ($originalPrice >= $discount->min_purchase_amount) {
+                    if ($originalPrice >= $discount->minimum) {
                         $discountValue = ($discount->value / 100) * $originalPrice;
                         $originalPrice -= $discountValue;
                     }

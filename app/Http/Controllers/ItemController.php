@@ -18,9 +18,12 @@ class ItemController extends Controller
         $category = $request->query('category');
         $tableNumber = $request->query('table');
         $showModal = !$request->has('table');
-        $items = Item::when($category, function ($query) use ($category) {
+        
+        $items = Item::with('discounts') // Memuat relasi discounts
+        ->when($category, function ($query) use ($category) {
             $query->where('category', $category);
-        })->get();
+        })
+        ->get();
 
         $categories = ['Snack', 'Rice', 'Noodle', 'Coffee', 'Non-Coffee'];
 

@@ -10,13 +10,26 @@ class ReportController extends Controller
 {
     public function index(Request $request)
     {
-        $type = $request->query('type','daily');
+        $type = $request->query('type', 'daily');
         $dateColumn = $type === 'daily' ? 'DATE(created_at)' : 'DATE_FORMAT(created_at, "%Y-%m")';
 
-        $salesReport = Order::selectRaw("$dateColumn as date, id as order_id, total_price")
-            ->orderBy('order_id','asc')
-            ->get();
+        $date = $request->query('date');
+        $month = $request->query('month');
 
-        return view('report.index',compact('salesReport','type'));
+        $query = Order::selectRaw("$dateColumn as date, id as order_id, total_price")
+                    ->orderBy('date', 'asc');
+
+        if ($type === 'daily' && $date) {
+            $query->whereDate('created_at', $date);
+        }
+
+        if ($type === 'monthly' && $month) {
+            $query->whereMonth('created_at', explode('-', $month)[1])
+                ->whereYear('created_at', explode('-', $month)[0]);
+        }
+
+        $salesReport = $query->get();
+
+        return view('report.index', compact('salesReport', 'type'));
     }
 }

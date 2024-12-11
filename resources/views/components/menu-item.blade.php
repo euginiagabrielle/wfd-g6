@@ -1,6 +1,12 @@
 @props(['item'])
 
 <div class="bg-orange-100 relative">
+    @if ($item->discounts->isNotEmpty())
+        @foreach ($item->discounts as $discount)
+            <p class="absolute top-0 right-0 bg-red-700 text-white px-6 py-2">{{ $discount->value }}%</p>
+        @endforeach
+    @endif
+
     <img class=" w-full h-60 object-cover" src="{{ asset('storage/' . $item['image']) }}" />
     <div class="p-4 mb-20">
         <p class="text-red-600 text-3xl">{{ $item['name'] }}</p>

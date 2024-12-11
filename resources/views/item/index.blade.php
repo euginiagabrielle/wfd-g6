@@ -18,7 +18,7 @@
                 <tr>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->description }}</td>
-                    <td>Rp {{ number_format($item->price, 0, ',', '.')}}</td>
+                    <td>{{ number_format($item->price, 0, ',', '.')}}</td>
                     <td><img src="{{ asset('storage/' . $item->image) }}" class="w-20 h-20"></td>
                     <td>
                         <a href="{{ route('item.edit', $item->id) }}">Edit</a>

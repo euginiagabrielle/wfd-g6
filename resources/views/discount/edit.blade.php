@@ -5,7 +5,7 @@
         <h1 class="font-bold text-lg w-fit mx-auto">Edit Discount</h1>
         <form class="flex flex-col max-w-2xl mx-auto" action="{{ route('discount.update', $discount->id) }}" method="POST">
             @csrf
-            @method('PUT')
+            @method('PATCH')
 
             <div>
                 <x-input-label for="name" :value="__('Name')" />
