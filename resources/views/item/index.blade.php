@@ -1,6 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style>
+    table.dataTable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.dataTable th, table.dataTable td {
+    border: 1px solid #ddd; /* Adjust the color and style of the border */
+}
+
+.item-image {
+    width: 100px;  /* Set the desired width */
+    height: 100px; /* Set the desired height */
+    object-fit: cover; /* Ensures the image is cropped to fit the specified dimensions */
+}
+
+</style>
 <br>
 
 <div class="container mx-auto">
@@ -34,7 +52,8 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->description }}</td>
                             <td>{{ $item->price }}</td>
-                            <td><img src="{{ asset('storage/' . $item->image) }}"></td>
+                            <td><img src="{{ asset('storage/' . $item->image) }}" class="item-image"></td>
+
                             <td>
                                 <button type="button" onclick="window.location.href='{{ route('item.edit', $item->id) }}'"  class="text-white text-m bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2">
                                     Edit
