@@ -4,7 +4,7 @@
     @if ($item->discounts->isNotEmpty())
         @foreach ($item->discounts as $discount)
             @if ($discount->value > 0)
-                <p class="absolute top-0 right-0 bg-red-700 text-xl text-white px-5 py-2 shadow-md">{{ $discount->value }}%</p>
+                <p class="absolute top-0 right-0 bg-red-600 text-xl text-white px-5 py-2 shadow-md">{{ $discount->value }}%</p>
             @endif
         @endforeach
     @endif
