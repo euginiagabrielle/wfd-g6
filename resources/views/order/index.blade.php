@@ -16,10 +16,6 @@
 
     <br>
     <div class="container mx-auto">
-        <h1 class="text-3xl font-bold text-center">Order List</h1>
-    </div>
-    <br>
-    <div class="container mx-auto">
         <h1 class="text-3xl text-center">Order List</h1>
     </div>
 

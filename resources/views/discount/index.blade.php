@@ -16,7 +16,7 @@
 
     <br>
     <div class="container mx-auto">
-        <h1 class="text-3xl font-bold text-center">Discounts</h1>
+        <h1 class="text-3xl text-center">Discounts</h1>
     </div>
 
 
