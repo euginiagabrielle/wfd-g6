@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto my-8">
+<div class="container mx-auto my-8 px-10">
     <h1 class="text-2xl font-semibold mb-4">
         Sales Report - {{ ucfirst($type) }}
     </h1>
@@ -9,11 +9,11 @@
     <!-- Filter untuk harian atau bulanan -->
     <div class="flex space-x-4 mb-4">
         <a href="{{ route('report.index', ['type' => 'daily']) }}" 
-           class="btn {{ $type === 'daily' ? 'btn-primary' : 'btn-secondary' }}">
+        class="btn {{ $type === 'daily' ? 'btn-primary border-b-2 border-yellow-300' : 'btn-secondary' }} text-red-600 hover:border-b-2 hover:border-yellow-300">
             Daily Report
         </a>
         <a href="{{ route('report.index', ['type' => 'monthly']) }}" 
-           class="btn {{ $type === 'monthly' ? 'btn-primary' : 'btn-secondary' }}">
+        class="btn {{ $type === 'monthly' ? 'btn-primary border-b-2 border-yellow-300' : 'btn-secondary' }} text-red-600 hover:border-b-2 hover:border-yellow-300">
             Monthly Report
         </a>
     </div>
