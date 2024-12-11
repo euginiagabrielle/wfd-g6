@@ -63,7 +63,7 @@ class OrderController extends Controller
                 if ($discounts->has($itemId)) {
                     $discount = $discounts->get($itemId);
 
-                    if ($originalPrice >= $discount->min_purchase_amount) {
+                    if ($originalPrice >= $discount->minimum) {
                         $discountValue = ($discount->value / 100) * $originalPrice;
                         $originalPrice -= $discountValue;
                     }
@@ -112,27 +112,14 @@ class OrderController extends Controller
         return redirect()->route('checkout', $order->id);
     }
 
-    public function edit(Order $order) {
+    public function edit(Order $order) 
+    {
         $order->load(['orderItems.item']);
         return view('order.edit', compact('order')); 
     }
 
-    // public function update(Request $request, Order $order) {
-    //     $request->validate([
-    //         'status' => 'required|in:pending,process,completed,canceled',
-    //     ]);
-
-    //     if ($order->status !== 'pending' && $order->status !== 'process') {
-    //         return redirect()->back()->with('error', 'Status can only be updated when it is "pending" or "process".');
-    //     }
-
-    //     $order->status = $request->input('status');
-    //     $order->save();
-
-    //     return redirect()->route('order.index')->with('success', 'Order status updated successfully.');
-    // }
-
-    public function update(Request $request, Order $order) {
+    public function update(Request $request, Order $order) 
+    {
         $request->validate([
             'status' => 'required|in:pending,process,completed,canceled',
         ]);

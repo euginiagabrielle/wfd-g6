@@ -4,6 +4,7 @@ use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ItemController::class, "menu"])->name('menu');
@@ -25,26 +26,34 @@ Route::get('/checkout/{order:id}', [OrderController::class, 'checkout'])->name('
 Route::get('/checkout/success/{order:id}', [OrderController::class, 'success'])->name('order.success');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/items', [ItemController::class, 'index'])->name('item.index');
-    Route::get('/items/create', [ItemController::class, 'create'])->name('item.create');
-    Route::post('/items', [ItemController::class, 'store'])->name('item.store');
-    Route::get('/items/{item:id}/edit', [ItemController::class, 'edit'])->name('item.edit');
-    Route::patch('/items/{item:id}', [ItemController::class, 'update'])->name('item.update');
-    Route::delete('/items/{item:id}', [ItemController::class, 'destroy'])->name('item.destroy');
+    Route::middleware(['role:admin,manager'])->group(function(){
+        Route::get('/items', [ItemController::class, 'index'])->name('item.index');
 
-    Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
-    Route::get('/orders/{order:id}/edit', [OrderController::class, 'edit'])->name('order.edit'); // buat edit status pesanan
-    // Route::patch('/orders/{order:id}', [OrderController::class, 'update'])->name('order.update');
-    Route::patch('/orders/{order}', [OrderController::class, 'update'])->name('order.update');
+        Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
+        Route::get('/orders/{order:id}/edit', [OrderController::class, 'edit'])->name('order.edit');
+        Route::patch('/orders/{order:id}', [OrderController::class, 'update'])->name('order.update');
 
-    Route::delete('/orders/{order:id}', [OrderController::class, 'destroy'])->name('order.destroy'); // buat batalkan pesanan
+        Route::get('/discounts', [DiscountController::class, 'index'])->name('discount.index');
+    });
 
-    Route::get('/discounts', [DiscountController::class, 'index'])->name('discount.index');
-    Route::get('/discounts/create', [DiscountController::class, 'create'])->name('discount.create');
-    Route::post('/discounts', [DiscountController::class, 'store'])->name('discount.store');
-    Route::get('/discounts/{discount:id}/edit', [DiscountController::class, 'edit'])->name('discount.edit');
-    Route::patch('/discounts/{discount:id}', [DiscountController::class, 'update'])->name('discount.update');
-    Route::delete('/discounts/{discount:id}', [DiscountController::class, 'destroy'])->name('discount.destroy');
+    Route::middleware(['role:manager'])->group(function(){
+        Route::get('/items/create', [ItemController::class, 'create'])->name('item.create');
+        Route::post('/items', [ItemController::class, 'store'])->name('item.store');
+        Route::get('/items/{item:id}/edit', [ItemController::class, 'edit'])->name('item.edit');
+        Route::patch('/items/{item:id}', [ItemController::class, 'update'])->name('item.update');
+        Route::delete('/items/{item:id}', [ItemController::class, 'destroy'])->name('item.destroy');
+
+        Route::get('/discounts/create', [DiscountController::class, 'create'])->name('discount.create');
+        Route::post('/discounts', [DiscountController::class, 'store'])->name('discount.store');
+        Route::get('/discounts/{discount:id}/edit', [DiscountController::class, 'edit'])->name('discount.edit');
+        Route::patch('/discounts/{discount:id}', [DiscountController::class, 'update'])->name('discount.update');
+        Route::delete('/discounts/{discount:id}', [DiscountController::class, 'destroy'])->name('discount.destroy');
+
+        
+        Route::get('/reports', [ReportController::class, 'index'])->name('report.index');
+    });
+    
+    // Route::delete('/orders/{order:id}', [OrderController::class, 'destroy'])->name('order.destroy'); // buat batalkan pesanan
 });
 
 require __DIR__ . '/auth.php';

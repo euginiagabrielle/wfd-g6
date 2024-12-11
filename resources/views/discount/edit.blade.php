@@ -9,7 +9,7 @@
         </div>
         <form class="flex flex-col max-w-2xl mx-auto" action="{{ route('discount.update', $discount->id) }}" method="POST">
             @csrf
-            @method('PUT')
+            @method('PATCH')
 
             <div>
                 <x-input-label for="name" :value="__('Name')" />
@@ -46,6 +46,7 @@
             </div>
 
             <x-primary-button type="submit" class="mt-4">Update</x-primary-button>
+            <a href="/discounts" class="rounded mt-4 p-2 text-md leading-6 text-rose-600 bg-yellow-300 hover:bg-yellow-200 text-center">Cancel</a>
         </form>
     </div>
 @endsection

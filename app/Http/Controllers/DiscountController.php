@@ -54,7 +54,7 @@ class DiscountController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'value' => 'required|integer|min:1|max:100',
+            'value' => 'required|integer|min:0|max:100',
             'item_id' => 'required|exists:items,id',
             'minimum' => 'required|numeric|min:0',
         ]);

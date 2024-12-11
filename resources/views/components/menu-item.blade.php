@@ -1,11 +1,19 @@
 @props(['item'])
 
-<div class="bg-orange-100">
-    <img class=" w-full h-60 object-cover" src="{{ asset('/storage/' . $item['image']) }}" />
-    <div class="p-4">
+<div class="bg-orange-100 relative">
+    @if ($item->discounts->isNotEmpty())
+        @foreach ($item->discounts as $discount)
+            @if ($discount->value > 0)
+                <p class="absolute top-0 right-0 bg-red-600 text-xl text-white px-5 py-2 shadow-md">{{ $discount->value }}%</p>
+            @endif
+        @endforeach
+    @endif
+
+    <img class=" w-full h-60 object-cover" src="{{ asset('storage/' . $item['image']) }}" />
+    <div class="p-4 mb-20">
         <p class="text-red-600 text-3xl">{{ $item['name'] }}</p>
         <p class="font-inter text-red-800"> {{ $item['description'] }}</p>
-        <div class="flex mt-4 gap-2 justify-between items-center">
+        <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center">
             <p class="text-red-600 text-3xl">Rp, {{ number_format($item['price'], 0, ',', '.') }}</p>
             <x-primary-button data-modal-target="{{ $item['id'] }}-modal" data-modal-toggle="{{ $item['id'] }}-modal"
                 class="rounded-none bg-red-600 hover:bg-red-700">
@@ -32,7 +40,7 @@
 
         <div class="mb-4">
             <label class="block mb-2 text-red-600 text-xl">Notes</label>
-            <textarea id="orderNotes" class="w-full p-2 border rounded" placeholder="Any special requests?"></textarea>
+            <textarea id="orderNotes-{{ $item['id'] }}" class="w-full p-2 border rounded" placeholder="Any special requests?"></textarea>
         </div>
 
         <div class="flex justify-end gap-2">
