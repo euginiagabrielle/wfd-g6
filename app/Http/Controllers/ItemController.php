@@ -56,16 +56,6 @@ class ItemController extends Controller
         $validated['image'] = $imagePath ?? null;
 
         Item::create($validated);
-
-        Item::create([
-            'id' => Str::uuid()->toString(),
-            'name' => $validated['name'],
-            'description' => $validated['description'],
-            'price' => $validated['price'],
-            'category' => $validated['category'],
-            'image' => $imagePath ?? null,
-            'availability' => $validated['availability'] ?? true,
-        ]);
         return redirect()->route('item.index')->with('success', 'Item created successfully');
     }
     public function destroy($id)
