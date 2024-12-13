@@ -10,7 +10,15 @@
         table.dataTable th,
         table.dataTable td {
             border: 1px solid #ddd;
-            /* Adjust the color and style of the border */
+        }
+
+        .order-item-details {
+            border-bottom: 1px dotted #ccc;
+            padding: 5px 0;
+        }
+
+        .order-item-details:last-child {
+            border-bottom: none;
         }
     </style>
 
@@ -29,9 +37,7 @@
                             <tr>
                                 <th scope="col">Order ID</th>
                                 <th>Table Number</th>
-                                <th>Item</th>
-                                <th>Quantity</th>
-                                <th>Notes</th>
+                                <th>Order Details</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -42,27 +48,29 @@
                                     <td>{{ $order->id }}</td>
                                     <td>{{ $order->table_number }}</td>
                                     <td>
-                                        @foreach ($order->orderItems as $item)
-                                            <p>
-                                                {{ $item->item->name }}
-                                            </p>
+                                        @foreach ($order->orderItems as $orderItem)
+                                            <div class="order-item-details">
+                                                <strong>Item:</strong> {{ $orderItem->item->name }}
+                                                ({{ $orderItem->quantity }}x)
+                                                <br>
+
+                                                @if ($orderItem->notes)
+                                                    <strong>Notes:</strong> {{ $orderItem->notes }}
+                                                @endif
+                                            </div>
                                         @endforeach
                                     </td>
                                     <td>
-                                        @foreach ($order->orderItems as $orderItem)
-                                            <p>
-                                                {{ $orderItem->quantity }}
-                                            </p>
-                                        @endforeach
+                                        <span
+                                            class="px-2 py-1 rounded-lg 
+                                              @if ($order->status === 'success') bg-green-200 text-green-800 
+                                              @elseif($order->status === 'canceled') 
+                                                  bg-red-200 text-red-800 
+                                              @else 
+                                                  bg-blue-200 text-blue-800 @endif">
+                                            {{ ucfirst($order->status) }}
+                                        </span>
                                     </td>
-                                    <td>
-                                        @foreach ($order->orderItems as $orderItem)
-                                            <p>
-                                                {{ $orderItem->notes }}
-                                            </p>
-                                        @endforeach
-                                    </td>
-                                    <td>{{ ucfirst($order->status) }}</td>
 
                                     <td>
                                         <button type="button"

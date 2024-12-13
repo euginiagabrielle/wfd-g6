@@ -20,6 +20,7 @@ class ItemController extends Controller
         $showModal = !$request->has('table');
         
         $items = Item::with('discounts')
+        ->where('availability', true)
         ->when($category, function ($query) use ($category) {
             $query->where('category', $category);
         })
@@ -102,7 +103,7 @@ class ItemController extends Controller
         $item->category = $validated['category'];
         $item->availability = $validated['availability'] ?? true;
         $item->image = isset($imagePath) ? $imagePath : $item->image;
-
+        
         $item->save();
 
         return redirect()->route('item.index')->with('success', 'Item updated successfully');

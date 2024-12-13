@@ -51,8 +51,9 @@
                     id="image" name="image" type="file">
                 <x-input-error :messages="$errors->get('image')" class="mt-2" />
             </div>
-            <div class="mt-4">
-                <label for="availability" class="inline-flex justify-between w-full items-center mb-5 cursor-pointer">
+            <div class="mt-4 ">
+                <label for="availability"
+                    class="inline-flex hidden justify-between w-full items-center mb-5 cursor-pointer">
                     <span class=" text-sm font-medium text-gray-700 dark:text-gray-300">Item availability</span>
                     <input :value="old('availability')" type="checkbox" id="availability" class="sr-only peer">
                     <div
