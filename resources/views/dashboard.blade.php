@@ -56,7 +56,7 @@
                 label: "Jumlah Item yang terjual",
                 data: @json($counts),
                 backgroundColor: labels.map(() =>
-                    `rgba(${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)}, 0.2)`
+                    `rgba(${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)}, 0.3)`
                 ),
                 borderWidth: 1
             }]
